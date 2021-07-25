@@ -21,17 +21,17 @@ class CookTimer: public wxApp
 
 static const wxCmdLineEntryDesc g_cmdLineDesc [] =
 	{
-     { wxCMD_LINE_SWITCH, NULL, wxT("help"), wxT("displays help on the command line parameters"),
+     { wxCMD_LINE_SWITCH, NULL, "help", "displays help on the command line parameters",
           wxCMD_LINE_VAL_NONE, wxCMD_LINE_OPTION_HELP },
-     { wxCMD_LINE_OPTION, wxT("h"), wxT("hours"), wxT("set hours"),
+     { wxCMD_LINE_OPTION, "h", "hours", "set hours",
           wxCMD_LINE_VAL_NUMBER, 0  },
-     { wxCMD_LINE_OPTION, wxT("m"), wxT("minutes"), wxT("set minutes"),
+     { wxCMD_LINE_OPTION, "m", "minutes", "set minutes",
           wxCMD_LINE_VAL_NUMBER, 0  },
-     { wxCMD_LINE_OPTION, wxT("s"), wxT("seconds"), wxT("set seconds"),
+     { wxCMD_LINE_OPTION, "s", "seconds", "set seconds",
           wxCMD_LINE_VAL_NUMBER, 0  },
-     { wxCMD_LINE_SWITCH, wxT("ns"), wxT("nostart"), wxT("Don't start counting once launched"),
+     { wxCMD_LINE_SWITCH, "ns", "nostart", "Don't start counting once launched",
           wxCMD_LINE_VAL_NONE, 0  },
-     { wxCMD_LINE_PARAM, NULL, NULL, wxT("time in the format HH:MM:SS"),
+     { wxCMD_LINE_PARAM, NULL, NULL, "time in the format HH:MM:SS",
           wxCMD_LINE_VAL_STRING, wxCMD_LINE_PARAM_OPTIONAL  },
  
      { wxCMD_LINE_NONE }
