@@ -7,8 +7,8 @@ from wxconfig import *
 
 wxFolder = None
 
-opts = Options()
-opts.Add(BoolOption('release', 'Set to 1 for release build', 0))
+vars = Variables(None, ARGUMENTS)
+vars.Add('release', default=0)
 
 if ("WXWIN" in os.environ):
 	wxFolder = os.environ["WXWIN"];
@@ -18,13 +18,13 @@ else:
 env = None
 if (ARGUMENTS.get("MSVS_VERSION", None) == None):
 	if sys.platform == 'win32':
-		env = Environment(tools = ['msvc', 'mslink'], options = opts, ENV = os.environ)	
+		env = Environment(variables=vars, tools = ['msvc', 'mslink'], ENV = os.environ)	
 	else:
-		env = Environment(options = opts, ENV = os.environ)
+		env = Environment(variables=vars, ENV = os.environ)
 else:
-	env = Environment(options = opts, ENV = os.environ, MSVS_VERSION=ARGUMENTS.get("MSVS_VERSION", None))
+	env = Environment(variables=vars, ENV = os.environ, MSVS_VERSION=ARGUMENTS.get("MSVS_VERSION", None))
 
-Help(opts.GenerateHelpText(env))
+Help(vars.GenerateHelpText(env))
 
 ### setup variables needed, mainly to support cross-compilation
 env['build_platform']=env['PLATFORM']
@@ -46,9 +46,9 @@ compilerIsGccLike = not compilerIsVC;
 
 if not env.GetOption('clean'):
 	if compilerIsVC:
-		print "Compiling using Visual C++...";
+		print("Compiling using Visual C++...")
 	elif compilerIsGccLike:
-		print "Compiling using '%s', assuming GCC-like compiler" % env['CXX'];
+		print(("Compiling using '%s', assuming GCC-like compiler" % env['CXX']))
 
 debug = (env['release'] == 0)
 
@@ -62,7 +62,7 @@ conf = Configure(env, custom_tests = {'CheckWXConfig' : CheckWXConfig })
 #                   ['adv', 'core', 'base'], in this order. If you use
 #                   wxGLCanvas, prepend 'gl' like below.
 if not conf.CheckWXConfig('2.6', ['adv', 'core', 'base'], debug):
-	print 'Error finding wxWidgets library.'
+	print('Error finding wxWidgets library.')
 
 env = conf.Finish()
 
