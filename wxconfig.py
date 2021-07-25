@@ -9,7 +9,6 @@ import os, os.path
 import re
 import sys
 import glob
-import string
 
 # Runs a system command and returns return value and output
 def SystemBacktick(program):
@@ -41,7 +40,7 @@ def CheckWXConfigVersion(context, version):
 def CheckWXConfigComponents(context, libraries):
 	# set components, method depending on wxWidgets version
 	if CheckWXConfigVersion(context, '2.6'):
-		context.env['wxconfig_postargs'] += ' '+string.join(libraries,',')
+		context.env['wxconfig_postargs'] += ' '+','.join(libraries)
 		return SystemWXConfig(context.env, '--libs ')[0] == 0
 	# version 2.4 or below, only gl is an optional component with special flag
 	if 'gl' in libraries:
@@ -208,7 +207,7 @@ def CheckWXConfig(context, version, components, debug = False):
 	if res:
 		res = CheckWXConfigComponents(context, components)
 		if not res:
-			context.Message('not all components found ['+string.join(components,',')+']... ')
+			context.Message('not all components found ['+','.join(components)+']... ')
 
 	context.Result(res)
 	return res
