@@ -51,12 +51,7 @@ CookTimerFrame::CookTimerFrame(wxWindow* parent)
 		// its own
 		SetIcon(wxICON(A));
 	#else
-		// we have to make an IconBundle containing the 2 icons to avoid
-		// the Window manager having to scale the icon for us which doesn't
-		// always look good
-		wxIconBundle icons(wxICON(A));
-		icons.AddIcon(wxICON(TrayIcon));
-		SetIcons(icons);
+		SetIcons(wxICON(TrayIcon));
 	#endif	// !_WIN32
 	
 	const wxString presetsRadioBox_choices[] = {
